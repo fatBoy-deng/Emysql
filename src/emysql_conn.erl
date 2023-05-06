@@ -31,7 +31,8 @@
         open_connections/1, open_connection/1,
         reset_connection/3, close_connection/1,
         open_n_connections/2, hstate/1,
-        test_connection/2, need_test_connection/1
+        test_connection/2, need_test_connection/1,
+	encode/1
 ]).
 
 -include("emysql.hrl").
@@ -403,6 +404,8 @@ hstate(State) ->
 
 %% @doc Encode a value so that it can be included safely in a MySQL query.
 %% @spec encode(term(), list | binary) -> string() | binary() | {error, Error}
+encode(Val) ->
+    encode(Val, list).
 encode(null, list) ->
     "null";
 encode(undefined, list) ->
